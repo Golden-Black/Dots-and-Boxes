@@ -9,12 +9,12 @@ public class BoardMap {
     private int plys;
     public ArrayList<ArrayList<String>> theMap = new ArrayList<ArrayList<String>>();
 
+
     // constructor
     public BoardMap(int rows, int cols, int plys){
         this.rows = rows;
         this.cols = cols;
         this.plys = plys;
-
         // constructing the map
         for(int i = 0; i < 2 * rows + 1; i++){
             if(i % 2 == 0){

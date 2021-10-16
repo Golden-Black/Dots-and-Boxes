@@ -8,6 +8,7 @@ public class Main {
         game.start(setRows(), setCols(), setPlys(), setFirstMove());
     }
 
+
     // ask user the row size of the board
     public static int setRows() throws IOException {
         System.out.println("Please specify the number of rows of the board: ");
@@ -21,6 +22,7 @@ public class Main {
         }
         return Integer.parseInt(strRow);
     }
+
 
     // ask user the column size of the board
     public static int setCols() throws IOException {
@@ -36,6 +38,7 @@ public class Main {
         return Integer.parseInt(strCol);
     }
 
+
     // ask user about the plys
     public static int setPlys() throws IOException {
         System.out.println("Please enter the number of plys: ");
@@ -43,6 +46,7 @@ public class Main {
         String strPly = br2.readLine();
         return Integer.parseInt(strPly);
     }
+
 
     // deciding who goes first
     public static boolean setFirstMove() throws IOException {
