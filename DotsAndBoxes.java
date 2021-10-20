@@ -1,11 +1,10 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 
 public class DotsAndBoxes {
-    public void start(int rows, int cols, int plys, boolean userMove) throws IOException {
+    public void start(int rows, int cols, int plys, boolean userMove) throws IOException, CloneNotSupportedException {
         BoardMap boardMap = new BoardMap(rows, cols, plys);
         AI ai = new AI(0);
         User user = new User(0);
@@ -23,10 +22,12 @@ public class DotsAndBoxes {
             }else{
                 int[][] nextMove = new int[2][2];
                 boolean alphaBetaOn = true;
-                boolean min = plys % 2 != 0;
-                
-                int[][] zeroPly = NoSearchMove(boardMap);
-                nextMove = ai.MiniMax(boardMap, 0, plys, ai.score, alphaBetaOn, min, zeroPly, user.score);
+                boolean min = false;
+                if(plys == 0){
+                    nextMove = NoSearchMove(boardMap);
+                }else {
+                    nextMove = ai.NextStep(boardMap.theMap, plys, ai.score, user.score, min);
+                }
                 ai.score += MarkDown(boardMap, nextMove[0], nextMove[1], userMove);
                 System.out.println("AI has made the move");
             }
@@ -50,7 +51,7 @@ public class DotsAndBoxes {
     }
 
 
-    // if ply is 0, the AI will return a random available next step
+//     if ply is 0, the AI will return a random available next step
     private int[][] NoSearchMove(BoardMap boardMap) {
         int counting = -1;
         HashMap<Integer, int[][]> availableEdges = new HashMap<Integer, int[][]>();
@@ -77,9 +78,14 @@ public class DotsAndBoxes {
                 }
             }
         }
-        Random rd = new Random();
-        int move = rd.nextInt(availableEdges.size());
-        return availableEdges.get(move);
+
+        if(availableEdges.size() == 1){
+            return availableEdges.get(0);
+        }else {
+            Random rd = new Random();
+            int move = rd.nextInt(availableEdges.size());
+            return availableEdges.get(move);
+        }
     }
 
 

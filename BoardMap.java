@@ -1,9 +1,7 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
-public class BoardMap {
+public class BoardMap implements Cloneable {
     public int rows;
     public int cols;
     private int plys;
